@@ -1,0 +1,98 @@
+[
+{
+    "model": "supply_chain.user",
+    "pk": 1,
+    "fields": {
+        "username": "admin",
+        "email": "admin@admin.com",
+        "password": "pbkdf2_sha256$600000$vQZ8xGx3qZ9K0L8Z9K0L8Z$8Z9K0L8Z9K0L8Z9K0L8Z9K0L8Z9K0L8Z9K0L8Z9K0L8=",
+        "is_staff": true,
+        "is_superuser": true,
+        "is_active": true,
+        "role": "ADMIN",
+        "phone": "123-456-7890",
+        "first_name": "Admin",
+        "last_name": "User"
+    }
+},
+{
+    "model": "supply_chain.user",
+    "pk": 2,
+    "fields": {
+        "username": "supplier1",
+        "email": "supplier1@supplier.com",
+        "password": "pbkdf2_sha256$600000$vQZ8xGx3qZ9K0L8Z9K0L8Z$8Z9K0L8Z9K0L8Z9K0L8Z9K0L8Z9K0L8Z9K0L8Z9K0L8=",
+        "is_staff": false,
+        "is_superuser": false,
+        "is_active": true,
+        "role": "SUPPLIER",
+        "phone": "123-456-7891",
+        "first_name": "John",
+        "last_name": "Supplier"
+    }
+},
+{
+    "model": "supply_chain.user",
+    "pk": 3,
+    "fields": {
+        "username": "manager1",
+        "email": "manager1@restaurant.com",
+        "password": "pbkdf2_sha256$600000$vQZ8xGx3qZ9K0L8Z9K0L8Z$8Z9K0L8Z9K0L8Z9K0L8Z9K0L8Z9K0L8Z9K0L8Z9K0L8=",
+        "is_staff": false,
+        "is_superuser": false,
+        "is_active": true,
+        "role": "MANAGER",
+        "phone": "123-456-7892",
+        "first_name": "Mary",
+        "last_name": "Manager"
+    }
+},
+{
+    "model": "supply_chain.user",
+    "pk": 4,
+    "fields": {
+        "username": "warehouse1",
+        "email": "warehouse1@warehouse.com",
+        "password": "pbkdf2_sha256$600000$vQZ8xGx3qZ9K0L8Z9K0L8Z$8Z9K0L8Z9K0L8Z9K0L8Z9K0L8Z9K0L8Z9K0L8Z9K0L8=",
+        "is_staff": false,
+        "is_superuser": false,
+        "is_active": true,
+        "role": "WAREHOUSE",
+        "phone": "123-456-7893",
+        "first_name": "Bob",
+        "last_name": "Warehouse"
+    }
+},
+{
+    "model": "supply_chain.user",
+    "pk": 5,
+    "fields": {
+        "username": "driver1",
+        "email": "driver1@delivery.com",
+        "password": "pbkdf2_sha256$600000$vQZ8xGx3qZ9K0L8Z9K0L8Z$8Z9K0L8Z9K0L8Z9K0L8Z9K0L8Z9K0L8Z9K0L8Z9K0L8=",
+        "is_staff": false,
+        "is_superuser": false,
+        "is_active": true,
+        "role": "DRIVER",
+        "phone": "123-456-7894",
+        "first_name": "Tom",
+        "last_name": "Driver"
+    }
+},
+{
+    "model": "supply_chain.user",
+    "pk": 6,
+    "fields": {
+        "username": "accountant1",
+        "email": "accountant1@accounting.com",
+        "password": "pbkdf2_sha256$600000$vQZ8xGx3qZ9K0L8Z9K0L8Z$8Z9K0L8Z9K0L8Z9K0L8Z9K0L8Z9K0L8Z9K0L8Z9K0L8=",
+        "is_staff": false,
+        "is_superuser": false,
+        "is_active": true,
+        "role": "ACCOUNTANT",
+        "phone": "123-456-7895",
+        "first_name": "Alice",
+        "last_name": "Accountant"
+    }
+}
+]

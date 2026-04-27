@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2"><i class="bi bi-box"></i> {{ product.name }}</h1>
+    <a href="{% url 'product_list' %}" class="btn btn-secondary">Back to List</a>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5>Product Details</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Product Name:</strong> {{ product.name }}</p>
+                        <p><strong>Category:</strong> {{ product.category.name }}</p>
+                        <p><strong>Supplier:</strong> {{ product.supplier.name }}</p>
+                        <p><strong>Unit:</strong> {{ product.unit }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Unit Price:</strong> €{{ product.unit_price|floatformat:2 }}</p>
+                        <p><strong>Stock Quantity:</strong> {{ product.stock_quantity }} {{ product.unit }}</p>
+                        <p><strong>Reorder Level:</strong> {{ product.reorder_level }}</p>
+                        <p><strong>Status:</strong> 
+                            {% if product.needs_reorder %}
+                            <span class="badge bg-danger">Low Stock</span>
+                            {% else %}
+                            <span class="badge bg-success">In Stock</span>
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+                
+                {% if product.description %}
+                <div class="mt-3">
+                    <strong>Description:</strong>
+                    <p>{{ product.description }}</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5>Inventory Info</h5>
+            </div>
+            <div class="card-body">
+                <p><strong>Created:</strong> {{ product.created_at|date:"Y-m-d" }}</p>
+                {% if product.needs_reorder %}
+                <div class="alert alert-warning">
+                    <i class="bi bi-exclamation-triangle"></i> Stock below reorder level!
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

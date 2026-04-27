@@ -1,0 +1,59 @@
+[
+{
+    "model": "supply_chain.supportcase",
+    "pk": 1,
+    "fields": {
+        "case_number": "CASE202604250001",
+        "restaurant": 1,
+        "subject": "Quality issue with tomatoes",
+        "description": "Some of the tomatoes in the last delivery were overripe. Please ensure better quality control.",
+        "status": "RESOLVED",
+        "priority": "MEDIUM",
+        "created_by": 3,
+        "assigned_to": 2,
+        "resolved_at": "2026-04-26T14:00:00Z"
+    }
+},
+{
+    "model": "supply_chain.caseresponse",
+    "pk": 1,
+    "fields": {
+        "case": 1,
+        "user": 2,
+        "message": "We apologize for the quality issue. We have reviewed our quality control process and will ensure this doesn't happen again. A credit will be applied to your next invoice."
+    }
+},
+{
+    "model": "supply_chain.caseresponse",
+    "pk": 2,
+    "fields": {
+        "case": 1,
+        "user": 3,
+        "message": "Thank you for the quick response and resolution."
+    }
+},
+{
+    "model": "supply_chain.supportcase",
+    "pk": 2,
+    "fields": {
+        "case_number": "CASE202604250002",
+        "restaurant": 1,
+        "subject": "Late delivery inquiry",
+        "description": "Our scheduled delivery for tomorrow needs to be moved to an earlier time if possible. Can we reschedule to 8 AM?",
+        "status": "IN_PROGRESS",
+        "priority": "HIGH",
+        "created_by": 3,
+        "assigned_to": 4,
+        "resolved_at": null
+    }
+},
+{
+    "model": "supply_chain.caseresponse",
+    "pk": 3,
+    "fields": {
+        "case": 2,
+        "user": 4,
+        "message": "Let me check with the driver and get back to you shortly."
+    }
+}
+]

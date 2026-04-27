@@ -1,0 +1,24 @@
+[
+{
+    "model": "supply_chain.restaurant",
+    "pk": 1,
+    "fields": {
+        "name": "The Golden Fork",
+        "address": "123 Main Street, Dublin, Ireland",
+        "phone": "01-234-5678",
+        "email": "info@goldenfork.ie",
+        "manager": 3
+    }
+},
+{
+    "model": "supply_chain.restaurant",
+    "pk": 2,
+    "fields": {
+        "name": "Ocean Breeze Bistro",
+        "address": "456 Coastal Road, Cork, Ireland",
+        "phone": "021-345-6789",
+        "email": "contact@oceanbreeze.ie",
+        "manager": null
+    }
+}
+]

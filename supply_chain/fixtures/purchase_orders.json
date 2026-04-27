@@ -1,0 +1,78 @@
+[
+{
+    "model": "supply_chain.purchaseorder",
+    "pk": 1,
+    "fields": {
+        "order_number": "202604250001",
+        "restaurant": 1,
+        "supplier": 1,
+        "status": "APPROVED",
+        "delivery_date": "2026-04-28",
+        "notes": "Weekly produce order",
+        "created_by": 3
+    }
+},
+{
+    "model": "supply_chain.orderitem",
+    "pk": 1,
+    "fields": {
+        "purchase_order": 1,
+        "product": 1,
+        "quantity": 20,
+        "unit_price": "3.50"
+    }
+},
+{
+    "model": "supply_chain.orderitem",
+    "pk": 2,
+    "fields": {
+        "purchase_order": 1,
+        "product": 2,
+        "quantity": 15,
+        "unit_price": "2.00"
+    }
+},
+{
+    "model": "supply_chain.orderitem",
+    "pk": 3,
+    "fields": {
+        "purchase_order": 1,
+        "product": 3,
+        "quantity": 30,
+        "unit_price": "1.50"
+    }
+},
+{
+    "model": "supply_chain.purchaseorder",
+    "pk": 2,
+    "fields": {
+        "order_number": "202604250002",
+        "restaurant": 1,
+        "supplier": 2,
+        "status": "FULFILLED",
+        "delivery_date": "2026-04-26",
+        "notes": "Meat order for weekend",
+        "created_by": 3
+    }
+},
+{
+    "model": "supply_chain.orderitem",
+    "pk": 4,
+    "fields": {
+        "purchase_order": 2,
+        "product": 5,
+        "quantity": 25,
+        "unit_price": "8.50"
+    }
+},
+{
+    "model": "supply_chain.orderitem",
+    "pk": 5,
+    "fields": {
+        "purchase_order": 2,
+        "product": 6,
+        "quantity": 10,
+        "unit_price": "18.00"
+    }
+}
+]

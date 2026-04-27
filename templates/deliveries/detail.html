@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block title %}Delivery {{ delivery.delivery_number }}{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2"><i class="bi bi-truck"></i> Delivery {{ delivery.delivery_number }}</h1>
+    <a href="{% url 'delivery_list' %}" class="btn btn-secondary">Back to List</a>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5>Delivery Details</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Delivery Number:</strong> {{ delivery.delivery_number }}</p>
+                        <p><strong>Purchase Order:</strong> 
+                            <a href="{% url 'purchase_order_detail' delivery.purchase_order.pk %}">
+                                {{ delivery.purchase_order.order_number }}
+                            </a>
+                        </p>
+                        <p><strong>Driver:</strong> {{ delivery.driver.username|default:"Not assigned" }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Scheduled Date:</strong> {{ delivery.scheduled_date }}</p>
+                        <p><strong>Actual Delivery:</strong> {{ delivery.actual_delivery_date|default:"Not delivered yet" }}</p>
+                        <p><strong>Status:</strong> 
+                            {% if delivery.status == 'DELIVERED' %}
+                            <span class="badge bg-success">{{ delivery.get_status_display }}</span>
+                            {% elif delivery.status == 'IN_TRANSIT' %}
+                            <span class="badge bg-info">{{ delivery.get_status_display }}</span>
+                            {% else %}
+                            <span class="badge bg-warning">{{ delivery.get_status_display }}</span>
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+                
+                <h6 class="mt-4">Delivery Items</h6>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in delivery.items.all %}
+                        <tr>
+                            <td>{{ item.product.name }}</td>
+                            <td>{{ item.quantity }} {{ item.product.unit }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                
+                {% if delivery.notes %}
+                <div class="mt-3">
+                    <strong>Notes:</strong>
+                    <p>{{ delivery.notes }}</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        {% if user.role == 'DRIVER' or user.role == 'WAREHOUSE' or user.role == 'ADMIN' %}
+        <div class="card">
+            <div class="card-header">
+                <h5>Update Status</h5>
+            </div>
+            <div class="card-body">
+                <form method="post" action="{% url 'delivery_update_status' delivery.pk %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <select name="status" class="form-select">
+                            <option value="PENDING" {% if delivery.status == 'PENDING' %}selected{% endif %}>Pending</option>
+                            <option value="IN_TRANSIT" {% if delivery.status == 'IN_TRANSIT' %}selected{% endif %}>In Transit</option>
+                            <option value="DELIVERED" {% if delivery.status == 'DELIVERED' %}selected{% endif %}>Delivered</option>
+                            <option value="FAILED" {% if delivery.status == 'FAILED' %}selected{% endif %}>Failed</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Update Status</button>
+                </form>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

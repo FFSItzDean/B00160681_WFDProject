@@ -1,0 +1,73 @@
+[
+{
+    "model": "supply_chain.delivery",
+    "pk": 1,
+    "fields": {
+        "delivery_number": "DEL202604250001",
+        "purchase_order": 2,
+        "driver": 5,
+        "status": "DELIVERED",
+        "scheduled_date": "2026-04-26T10:00:00Z",
+        "actual_delivery_date": "2026-04-26T10:30:00Z",
+        "notes": "Delivered successfully"
+    }
+},
+{
+    "model": "supply_chain.deliveryitem",
+    "pk": 1,
+    "fields": {
+        "delivery": 1,
+        "product": 5,
+        "quantity": 25
+    }
+},
+{
+    "model": "supply_chain.deliveryitem",
+    "pk": 2,
+    "fields": {
+        "delivery": 1,
+        "product": 6,
+        "quantity": 10
+    }
+},
+{
+    "model": "supply_chain.delivery",
+    "pk": 2,
+    "fields": {
+        "delivery_number": "DEL202604250002",
+        "purchase_order": 1,
+        "driver": 5,
+        "status": "IN_TRANSIT",
+        "scheduled_date": "2026-04-28T09:00:00Z",
+        "actual_delivery_date": null,
+        "notes": "En route to restaurant"
+    }
+},
+{
+    "model": "supply_chain.deliveryitem",
+    "pk": 3,
+    "fields": {
+        "delivery": 2,
+        "product": 1,
+        "quantity": 20
+    }
+},
+{
+    "model": "supply_chain.deliveryitem",
+    "pk": 4,
+    "fields": {
+        "delivery": 2,
+        "product": 2,
+        "quantity": 15
+    }
+},
+{
+    "model": "supply_chain.deliveryitem",
+    "pk": 5,
+    "fields": {
+        "delivery": 2,
+        "product": 3,
+        "quantity": 30
+    }
+}
+]

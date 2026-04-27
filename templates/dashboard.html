@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Dashboard</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="alert alert-info">
+            <h5><i class="bi bi-person-circle"></i> Welcome, {{ user.get_role_display }}!</h5>
+            <p class="mb-0">Logged in as: <strong>{{ user.username }}</strong></p>
+        </div>
+    </div>
+</div>
+
+<!-- Role-specific dashboard widgets -->
+{% if user.role == 'MANAGER' %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-cart"></i> Pending Orders</h5>
+                <h2>{{ pending_orders|default:0 }}</h2>
+                <a href="{% url 'purchase_order_list' %}" class="text-white">View Orders →</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-warning mb-3">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-receipt"></i> Pending Invoices</h5>
+                <h2>{{ pending_invoices|default:0 }}</h2>
+                <a href="{% url 'invoice_list' %}" class="text-white">View Invoices →</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-danger mb-3">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-headset"></i> Open Cases</h5>
+                <h2>{{ open_cases|default:0 }}</h2>
+                <a href="{% url 'support_case_list' %}" class="text-white">View Cases →</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <h4>Quick Actions</h4>
+        <a href="{% url 'purchase_order_create' %}" class="btn btn-primary me-2">
+            <i class="bi bi-plus-circle"></i> New Purchase Order
+        </a>
+        <a href="{% url 'support_case_create' %}" class="btn btn-secondary">
+            <i class="bi bi-plus-circle"></i> New Support Case
+        </a>
+    </div>
+</div>
+{% endif %}
+
+{% if user.role == 'SUPPLIER' %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card text-white bg-info mb-3">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-cart-check"></i> New Orders</h5>
+                <h2>{{ new_orders|default:0 }}</h2>
+                <a href="{% url 'purchase_order_list' %}" class="text-white">View Orders →</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-success mb-3">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-receipt"></i> Pending Invoices</h5>
+                <h2>{{ pending_invoices|default:0 }}</h2>
+                <a href="{% url 'invoice_list' %}" class="text-white">View Invoices →</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <h4>Quick Actions</h4>
+        <a href="{% url 'invoice_create' %}" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Create Invoice
+        </a>
+    </div>
+</div>
+{% endif %}
+
+{% if user.role == 'DRIVER' %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-truck"></i> Assigned Deliveries</h5>
+                <h2>{{ assigned_deliveries|default:0 }}</h2>
+                <a href="{% url 'delivery_list' %}" class="text-white">View Deliveries →</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% if user.role == 'ACCOUNTANT' %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card text-white bg-warning mb-3">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-receipt"></i> Pending Invoices</h5>
+                <h2>{{ pending_invoices|default:0 }}</h2>
+                <a href="{% url 'invoice_list' %}" class="text-white">View Invoices →</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-danger mb-3">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-exclamation-triangle"></i> Overdue Invoices</h5>
+                <h2>{{ overdue_invoices|default:0 }}</h2>
+                <a href="{% url 'invoice_list' %}" class="text-white">View Invoices →</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <h4>Quick Actions</h4>
+        <a href="{% url 'reports' %}" class="btn btn-primary">
+            <i class="bi bi-graph-up"></i> View Reports
+        </a>
+    </div>
+</div>
+{% endif %}
+
+{% if user.role == 'WAREHOUSE' %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-truck"></i> Pending Deliveries</h5>
+                <h2>{{ pending_deliveries|default:0 }}</h2>
+                <a href="{% url 'delivery_list' %}" class="text-white">View Deliveries →</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-warning mb-3">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-box"></i> Low Stock Items</h5>
+                <h2>{{ low_stock_items|default:0 }}</h2>
+                <a href="{% url 'product_list' %}?low_stock=1" class="text-white">View Products →</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% if user.role == 'ADMIN' %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Administrator Panel</h5>
+                <p>You have full access to all system features.</p>
+                <a href="/admin/" class="btn btn-primary">Django Admin Panel</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

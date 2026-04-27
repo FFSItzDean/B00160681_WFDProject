@@ -1,0 +1,24 @@
+[
+{
+    "model": "supply_chain.supplier",
+    "pk": 1,
+    "fields": {
+        "name": "Fresh Foods Ltd",
+        "address": "789 Industrial Park, Dublin, Ireland",
+        "phone": "01-987-6543",
+        "email": "sales@freshfoods.ie",
+        "contact_person": 2
+    }
+},
+{
+    "model": "supply_chain.supplier",
+    "pk": 2,
+    "fields": {
+        "name": "Quality Meats Co",
+        "address": "321 Business Center, Galway, Ireland",
+        "phone": "091-234-5678",
+        "email": "orders@qualitymeats.ie",
+        "contact_person": null
+    }
+}
+]

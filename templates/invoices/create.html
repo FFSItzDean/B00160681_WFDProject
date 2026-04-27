@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Invoice{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2"><i class="bi bi-plus-circle"></i> Create Invoice</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label for="{{ form.purchase_order.id_for_label }}" class="form-label">Purchase Order</label>
+                        {{ form.purchase_order }}
+                        <div class="form-text">Select the purchase order to create invoice from</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="{{ form.due_date.id_for_label }}" class="form-label">Due Date</label>
+                        {{ form.due_date }}
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.tax_rate.id_for_label }}" class="form-label">Tax Rate (%)</label>
+                            {{ form.tax_rate }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.discount.id_for_label }}" class="form-label">Discount (€)</label>
+                            {{ form.discount }}
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="{{ form.notes.id_for_label }}" class="form-label">Notes</label>
+                        {{ form.notes }}
+                    </div>
+                    
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">Create Invoice</button>
+                        <a href="{% url 'invoice_list' %}" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Add Bootstrap classes to form fields
+document.querySelectorAll('select, input, textarea').forEach(el => {
+    el.classList.add('form-control');
+});
+</script>
+{% endblock %}

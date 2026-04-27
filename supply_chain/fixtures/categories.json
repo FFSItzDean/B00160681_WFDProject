@@ -1,0 +1,50 @@
+[
+{
+    "model": "supply_chain.category",
+    "pk": 1,
+    "fields": {
+        "name": "Produce",
+        "description": "Fresh fruits and vegetables"
+    }
+},
+{
+    "model": "supply_chain.category",
+    "pk": 2,
+    "fields": {
+        "name": "Dairy",
+        "description": "Milk, cheese, butter, and dairy products"
+    }
+},
+{
+    "model": "supply_chain.category",
+    "pk": 3,
+    "fields": {
+        "name": "Meat & Poultry",
+        "description": "Fresh and frozen meats"
+    }
+},
+{
+    "model": "supply_chain.category",
+    "pk": 4,
+    "fields": {
+        "name": "Seafood",
+        "description": "Fresh and frozen seafood"
+    }
+},
+{
+    "model": "supply_chain.category",
+    "pk": 5,
+    "fields": {
+        "name": "Dry Goods",
+        "description": "Pasta, rice, flour, and dry ingredients"
+    }
+},
+{
+    "model": "supply_chain.category",
+    "pk": 6,
+    "fields": {
+        "name": "Beverages",
+        "description": "Drinks and beverages"
+    }
+}
+]

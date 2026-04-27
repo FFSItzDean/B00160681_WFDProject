@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}Deliveries{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2"><i class="bi bi-truck"></i> Deliveries</h1>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Delivery #</th>
+                <th>Purchase Order</th>
+                <th>Driver</th>
+                <th>Scheduled Date</th>
+                <th>Actual Delivery</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for delivery in deliveries %}
+            <tr>
+                <td><strong>{{ delivery.delivery_number }}</strong></td>
+                <td>{{ delivery.purchase_order.order_number }}</td>
+                <td>{{ delivery.driver.username|default:"-" }}</td>
+                <td>{{ delivery.scheduled_date|date:"Y-m-d H:i" }}</td>
+                <td>{{ delivery.actual_delivery_date|date:"Y-m-d H:i"|default:"-" }}</td>
+                <td>
+                    {% if delivery.status == 'DELIVERED' %}
+                    <span class="badge bg-success">{{ delivery.get_status_display }}</span>
+                    {% elif delivery.status == 'IN_TRANSIT' %}
+                    <span class="badge bg-info">{{ delivery.get_status_display }}</span>
+                    {% elif delivery.status == 'FAILED' %}
+                    <span class="badge bg-danger">{{ delivery.get_status_display }}</span>
+                    {% else %}
+                    <span class="badge bg-warning">{{ delivery.get_status_display }}</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'delivery_detail' delivery.pk %}" class="btn btn-sm btn-outline-primary">View</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7" class="text-center text-muted">No deliveries found</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

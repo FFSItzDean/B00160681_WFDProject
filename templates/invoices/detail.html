@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+
+{% block title %}Invoice {{ invoice.invoice_number }}{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2"><i class="bi bi-receipt"></i> Invoice {{ invoice.invoice_number }}</h1>
+    <div>
+        <a href="{% url 'invoice_list' %}" class="btn btn-secondary">Back to List</a>
+        {% if user.role == 'ACCOUNTANT' or user.role == 'ADMIN' %}
+        <a href="{% url 'payment_create' invoice.pk %}" class="btn btn-success">
+            <i class="bi bi-cash"></i> Record Payment
+        </a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>Invoice Details</h5>
+            </div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <p><strong>Invoice Number:</strong> {{ invoice.invoice_number }}</p>
+                        <p><strong>Purchase Order:</strong> {{ invoice.purchase_order.order_number }}</p>
+                        <p><strong>Issue Date:</strong> {{ invoice.issue_date }}</p>
+                        <p><strong>Due Date:</strong> {{ invoice.due_date }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Status:</strong> 
+                            {% if invoice.status == 'PAID' %}
+                            <span class="badge bg-success">{{ invoice.get_status_display }}</span>
+                            {% elif invoice.status == 'OVERDUE' %}
+                            <span class="badge bg-danger">{{ invoice.get_status_display }}</span>
+                            {% else %}
+                            <span class="badge bg-warning">{{ invoice.get_status_display }}</span>
+                            {% endif %}
+                        </p>
+                        <p><strong>Restaurant:</strong> {{ invoice.restaurant.name }}</p>
+                        <p><strong>Supplier:</strong> {{ invoice.supplier.name }}</p>
+                    </div>
+                </div>
+                
+                <h6 class="mt-4">Invoice Items</h6>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Quantity</th>
+                            <th>Unit Price</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in invoice.items.all %}
+                        <tr>
+                            <td>{{ item.description }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>€{{ item.unit_price|floatformat:2 }}</td>
+                            <td>€{{ item.subtotal|floatformat:2 }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" class="text-end"><strong>Subtotal:</strong></td>
+                            <td><strong>€{{ invoice.subtotal|floatformat:2 }}</strong></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-end">Tax ({{ invoice.tax_rate }}%):</td>
+                            <td>€{{ invoice.tax_amount|floatformat:2 }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-end">Discount:</td>
+                            <td>-€{{ invoice.discount|floatformat:2 }}</td>
+                        </tr>
+                        <tr class="table-primary">
+                            <td colspan="3" class="text-end"><strong>Total Amount:</strong></td>
+                            <td><strong>€{{ invoice.total_amount|floatformat:2 }}</strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
+                
+                {% if invoice.notes %}
+                <div class="mt-3">
+                    <strong>Notes:</strong>
+                    <p>{{ invoice.notes }}</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>Payment Summary</h5>
+            </div>
+            <div class="card-body">
+                <p><strong>Total Amount:</strong> €{{ invoice.total_amount|floatformat:2 }}</p>
+                <p><strong>Total Paid:</strong> €{{ total_paid|floatformat:2 }}</p>
+                <p><strong>Balance:</strong> 
+                    <span class="{% if balance > 0 %}text-danger{% else %}text-success{% endif %}">
+                        €{{ balance|floatformat:2 }}
+                    </span>
+                </p>
+            </div>
+        </div>
+        
+        {% if payments %}
+        <div class="card">
+            <div class="card-header">
+                <h5>Payment History</h5>
+            </div>
+            <div class="card-body">
+                {% for payment in payments %}
+                <div class="mb-3 pb-3 border-bottom">
+                    <p class="mb-1"><strong>€{{ payment.amount|floatformat:2 }}</strong></p>
+                    <p class="mb-1 small">{{ payment.payment_date }}</p>
+                    <p class="mb-0 small text-muted">{{ payment.get_payment_method_display }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
