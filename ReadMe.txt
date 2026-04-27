@@ -41,3 +41,12 @@ Testing:
 
 Run all tests:
   python manage.py test
+
+
+Deployment:
+
+Live application:
+  https://deantheb3an.pythonanywhere.com
+
+GitHub repository:
+  https://github.com/FFSItzDean/B00160681_WFDProject
