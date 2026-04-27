@@ -17,6 +17,7 @@ from .forms import (
 )
 
 # Authentication views
+# Handle user login
 def login_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -67,7 +68,7 @@ def dashboard(request):
     
     return render(request, 'dashboard.html', context)
 
-# Purchase Order views
+# Purchase order management
 @login_required
 def purchase_order_list(request):
     if request.user.role == 'MANAGER':
@@ -145,7 +146,7 @@ def purchase_order_approve(request, pk):
     messages.success(request, 'Order approved')
     return redirect('purchase_order_detail', pk=order.pk)
 
-# Invoice views (MUST-HAVE USE CASE)
+# Invoice management (must-have feature)
 @login_required
 def invoice_list(request):
     if request.user.role == 'MANAGER':
